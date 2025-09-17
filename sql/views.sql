@@ -36,19 +36,19 @@ FROM subscription_months
 GROUP BY month_start
 ORDER BY month_start;
 
-CREATE OR REPLACE VIEW trial_to_paid AS
+CREATE OR REPLACE VIEW trial_to_subscription AS
 WITH paid_any AS (
   SELECT account_id,
          MIN(start_date) AS first_paid_date
   FROM subscriptions
-  WHERE plan_tier NOT ILIKE 'free%' AND plan_tier NOT ILIKE 'trial%'
-  GROUP BY 1
+  WHERE is_trial = FALSE   
+  GROUP BY account_id
 )
 SELECT
   date_trunc('month', u.signup_date)::date AS signup_month,
   COUNT(DISTINCT u.account_id) AS accounts_signed_up,
   COUNT(DISTINCT p.account_id) AS accounts_paid,
-  (COUNT(DISTINCT p.account_id)::float / COUNT(DISTINCT u.account_id)) AS trial_to_paid_rate
+  (COUNT(DISTINCT p.account_id)::float / NULLIF(COUNT(DISTINCT u.account_id), 0)) AS trial_to_paid_rate
 FROM accounts u
 LEFT JOIN paid_any p USING (account_id)
 GROUP BY 1
