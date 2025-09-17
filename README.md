@@ -64,7 +64,7 @@ The Tableau dashboard connects to these views and presents key SaaS metrics:
 
 ---
 
-## 🚀 Insights & Applications
+## Insights & Applications
 This workflow mirrors real SaaS analytics practices:
 - **Growth**: Identify acquisition channels with highest conversion.  
 - **Product**: Detect retention drop-off points to improve onboarding.  
@@ -76,4 +76,7 @@ The project demonstrates end-to-end skills in:
 - **Data Storytelling**: turning raw data into actionable insights.  
 
 ---
-
+## Dashboard
+<p align="center">
+  <img src="./Dashboard.png" alt="result" width="80%" />
+</p>
